@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Three.js Örneği</title>
+	<style>
+		body { margin: 0; }
+		canvas { display: block; z-index: 100;  position: fixed; width: 100vh; height: 100vh;}
+        .cont-1{
+            height: 100vh;
+            width: 100vh;
+            z-index: 0;
+        }
+        .cont-2{
+            height: 15vh;
+            width: 100vh;
+            z-index: 0;
+        }
+        .butonum{
+          width: 180px;
+          height: 50px;
+          font-size: 20px;
+          position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid white;
+        background-color: transparent;
+        z-index: 1500;
+        color: white;
+        opacity: 0;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+
+        }
+
+        
+
+        header {
+          width: 100%;
+          position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  z-index: 3500;
+}
+
+footer {
+  top: 92%;
+          width: 100%;
+          position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  z-index: 2000;
+}
+
+.logo {
+  margin-right: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.logo2 {
+  margin-left: 100px;
+  align-items: center;
+  justify-content: center;
+}
+.logo img {
+  width: 70px;
+  height: auto;
+  margin-left: 150px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+.button img {
+ 
+width: 50px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.button{
+  align-items: center;
+  justify-content: center;
+  margin-right: 150px;
+  margin-top: 30px;
+  z-index: 3500;
+}
+.button2{
+  align-items: center;
+  justify-content: center;
+  margin-right: 100px;
+  
+}
+
+.kapsama {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1499; /* En üstte görünmesi için z-index değeri verin */
+  background-color: transparent; /* Siyah renk, %50 şeffaflık */
+  transition: background-color 0.5s ease;
+}
+
+.kapsama2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3000; /* En üstte görünmesi için z-index değeri verin */
+  background-color: rgba(0, 0, 0, 0.8); /* Siyah renk, %50 şeffaflık */
+  display: none;
+  transition: background-color 0.5s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+a{
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+p{
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+  }
+
+  .menuler{
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+  }
+
+.menu-divi1{
+  width: 100%;
+  height: 100px;
+  margin-top: 10%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+}
+
+.menu-divi2{
+  width: 100%;
+  height: 100px;
+  
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+}
+.menu-divi3{
+  width: 100%;
+  height: 100px;
+  
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+}
+
+
+	</style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/logom@4x.png" alt="Logo">
+    </div>
+    <div class="button">
+      <img class="menu-toggle" src="/toggle@4x.png" >
+    </div>
+  </header>
+  
+  <footer>
+    <div class="logo2">
+      <p >Bugasoft © 2023</p>
+    </div>
+    <div class="button2">
+      <a href="www.instagram.com/alibugatekin">Web Design : Ali Buğatekin</a>
+    </div>
+  </footer>
+	<canvas id="myCanvas"></canvas>
+    <div class="cont-1"></div>	
+    <div class="cont-1"></div>	
+    <div class="cont-2"></div>	
+    	
+    <div class="kapsama"></div>
+    <div class="kapsama2">
+      <div class="menu-divi1">
+        <a class="menuler" href="www.instagram.com/alibugatekin">Anasayfa</a>
+        
+      </div>
+      <div class="menu-divi2">
+        <a class="menuler" href="www.instagram.com/alibugatekin">Hakkımızda</a>
+       
+      </div>
+      <div class="menu-divi3">
+        
+        <a class="menuler" href="www.instagram.com/alibugatekin">İletişim</a>
+      </div>
+      
+    </div>
+    <button class="butonum">Canlı Görüntüle</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.131.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+	<script>
+  const canvas = document.getElementById("myCanvas");
+
+
+
+
+
+  /////////////  SAHNE İÇİN GEREKLİ ELEMANLARIN OLUŞTURULMASI
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.toneMapping = THREE.ReinhardToneMapping;
+renderer.toneMappingExposure = 3;
+
+  // Sahne oluşturma
+  const scene = new THREE.Scene();
+  
+
+  // Kamera oluşturma
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 1.2;
+  camera.position.x = -4;
+  camera.position.y = 5;
+
+  // Işık oluşturma
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(1, 1, 1).normalize();
+  scene.add(light);
+
+
+
+
+
+
+  //////////////  ZEMİN VE FOTOĞRAFLARIN PANELLERİNİN OLUŞTURULMASI VE TEXTURE'LERİN EKLENMESİ
+  const geometry = new THREE.PlaneGeometry(2, 1);
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+  const texture1 = new THREE.TextureLoader().load('resim1.jpg');
+  const material1 = new THREE.MeshBasicMaterial({ map: texture1 });
+  const plane1 = new THREE.Mesh(geometry, material1);
+  material1.toneMapped = false; 
+  plane1.position.x = -4;
+  
+  scene.add(plane1);
+
+  
+
+  const textureLoader = new THREE.TextureLoader();
+
+// Basecolor, metallic, normal ve ao texture'larını yükleyin
+const basecolorTexture = textureLoader.load('/basecolor.jpg');
+basecolorTexture.wrapS = THREE.RepeatWrapping;
+basecolorTexture.wrapT = THREE.RepeatWrapping;
+basecolorTexture.repeat.set(150,150);
+
+const normalTexture = textureLoader.load('/normal.jpg');
+normalTexture.wrapS = THREE.RepeatWrapping;
+normalTexture.wrapT = THREE.RepeatWrapping;
+normalTexture.repeat.set(150,150);
+
+const aoTexture = textureLoader.load('/ao.jpg');
+aoTexture.wrapS = THREE.RepeatWrapping;
+aoTexture.wrapT = THREE.RepeatWrapping;
+aoTexture.repeat.set(150,150);
+
+// MeshStandardMaterial oluşturun ve texture'ları ekleyin
+const planeMaterial = new THREE.MeshStandardMaterial({
+  map: basecolorTexture,
+  normalMap: normalTexture,
+  aoMap: aoTexture,
+});
+
+const planeGeometry = new THREE.PlaneGeometry(100, 100);
+const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+planeMesh.position.x = 0;
+planeMesh.position.y = -0.5;
+planeMesh.rotation.x = -Math.PI / 2; // Yatay olarak ayarlanması için rotasyonu ayarlayın
+scene.add(planeMesh);
+
+
+const texture2 = new THREE.TextureLoader().load('/resim2.jpg');
+  const material2 = new THREE.MeshBasicMaterial({ map: texture2 });
+  const plane2 = new THREE.Mesh(geometry, material2);
+  plane2.position.x = 0;
+  material2.toneMapped = false; 
+
+  scene.add(plane2);
+
+  const texture3 = new THREE.TextureLoader().load('/resim3.jpg');
+  const material3 = new THREE.MeshBasicMaterial({ map: texture3 });
+  const plane3 = new THREE.Mesh(geometry, material3);
+  plane3.position.x = 4;
+  material3.toneMapped = false; 
+  
+  scene.add(plane3);
+
+  
+
+  const scrollSpeed = 0.01; // scroll hareket hızı
+
+
+
+
+
+
+
+  ////////////  MOUSE WEBSİTE FOTOĞRAFLARININ ÜZERİNE GELDİĞİNDE KAMERANIN FOTOĞRAFLA AYNI HİZAYA GELEREK YAKLAŞMASI
+  ///////////   VE FOTOĞRAFA YAKINLAŞMASI İLE CANLI GÖRÜNTÜLEME BUTONUNUN AKTİF OLARAK ARKA PLANIN SİYAHLA KAPLANMASI
+
+function onMouseMove(event) {
+const raycaster = new THREE.Raycaster(); // Raycaster nesnesi oluştur
+const mouse = new THREE.Vector2(); // Fare koordinatlarını saklamak için vektör oluştur
+const moveSpeed = 0.0001; // Plane1 hareket hızı
+
+  // Fare koordinatlarını normalleştirerek [-1, 1] aralığına getir
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Raycaster'ı güncelle
+  raycaster.setFromCamera(mouse, camera);
+
+  // Tıklanan nesneleri bul
+  const intersectsPlane1 = raycaster.intersectObjects([plane1]);
+  const intersectsPlane2 = raycaster.intersectObjects([plane2]);
+  const intersectsPlane3 = raycaster.intersectObjects([plane3]);
+  
+  if (intersectsPlane1.length > 0 && aktifmi==false) {
+    // Kamera konumunu plane1 ile aynı x konumuna getir
+
+    // Plane1 nesnesini yavaşça öne doğru hareket ettir
+    
+    const targetZ = intersectsPlane1[0].point.z + 0.5; // Hedef z konumu
+    const distance = targetZ - plane1.position.z; // Mevcut pozisyondan hedefe uzaklık
+    let deltaZ = distance * moveSpeed; // Hareket mesafesi hesapla
+    if (plane1.position.z != 0.5) {
+
+      deltaZ = 1;
+      
+
+      gsap.to(camera.position, {z: deltaZ, duration: 1, ease: "power2.out"});
+      gsap.to(camera.position, {x: plane1.position.x, duration: 1, ease: "power2.out"});
+
+
+      const element = document.querySelector('.butonum');
+      element.style.opacity = '1';
+      const kapsamaDiv = document.querySelector('.kapsama');
+      kapsamaDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+
+
+    } 
+  }
+  else if(intersectsPlane2.length > 0 && aktifmi==false){
+    const targetZ = intersectsPlane2[0].point.z + 0.5; // Hedef z konumu
+    const distance = targetZ - plane2.position.z; // Mevcut pozisyondan hedefe uzaklık
+    let deltaZ = distance * moveSpeed; // Hareket mesafesi hesapla
+    if (plane2.position.z != 0.5) {
+
+      deltaZ = 1;
+      
+
+      gsap.to(camera.position, {z: deltaZ, duration: 1, ease: "power2.out"});
+      gsap.to(camera.position, {x: plane2.position.x, duration: 1, ease: "power2.out"});
+
+
+      const element = document.querySelector('.butonum');
+      element.style.opacity = '1';
+      const kapsamaDiv = document.querySelector('.kapsama');
+      kapsamaDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  }
+}
+  
+else if(intersectsPlane3.length > 0 && aktifmi==false){
+    const targetZ = intersectsPlane3[0].point.z + 0.5; // Hedef z konumu
+    const distance = targetZ - plane3.position.z; // Mevcut pozisyondan hedefe uzaklık
+    let deltaZ = distance * moveSpeed; // Hareket mesafesi hesapla
+    if (plane3.position.z != 0.5) {
+
+      deltaZ = 1;
+      
+
+      gsap.to(camera.position, {z: deltaZ, duration: 1, ease: "power2.out"});
+      gsap.to(camera.position, {x: plane3.position.x, duration: 1, ease: "power2.out"});
+
+
+      const element = document.querySelector('.butonum');
+      element.style.opacity = '1';
+      const kapsamaDiv = document.querySelector('.kapsama');
+      kapsamaDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  }
+}
+
+  else{
+    deltaZ = 1.2;
+
+    const element = document.querySelector('.butonum');
+    element.style.opacity = '0';
+      
+      gsap.to(camera.position, {z: deltaZ, duration: 1, ease: "power2.out"});
+      const kapsamaDiv = document.querySelector('.kapsama');
+
+      kapsamaDiv.style.backgroundColor = 'transparent';
+
+  }
+}
+window.addEventListener("mousemove", onMouseMove);
+
+
+
+
+
+
+/////////// KAMERANIN SCROLL İLE BİRLİKTE HAREKET ETMESİ
+
+  function handleScroll() {
+    // Yeni kamera pozisyonunu hesapla
+    const scrollY = window.scrollY;
+    const newCameraPosX = -4 + scrollY * scrollSpeed;
+    camera.position.setX(newCameraPosX);
+
+
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", onMouseMove);
+
+
+
+
+
+
+/////////// KAMERANIN DURDUĞU YERDE SALLANMASI
+  
+let theta = 0;
+function handleCameraShake() {
+  // Yeni kamera pozisyonunu hesapla
+  const shakeAmplitude = 0.05;
+  const shakeAmplitude2 = 0.02;
+  const shakeAmplitude3 = 0.0001;
+  camera.position.y = shakeAmplitude * Math.sin(theta);
+  camera.rotation.y = shakeAmplitude2 * Math.sin(theta);
+  camera.rotation.z = shakeAmplitude3 * Math.sin(theta);
+
+  // Theta değerini artır
+  theta += 0.02;
+}
+
+
+
+
+
+////////  PROJEYE YÜKLENEN 3 BOYUTLU HARİCİ MODELLER
+
+const loader = new THREE.GLTFLoader();
+loader.load('/profil anim3.gltf', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(1, -1.85, 26);
+  gltf.scene.scale.set(0.2, 0.2, 0.2); // modelin boyutunu ölçeklendirin
+
+
+  //const box = new THREE.BoxHelper(gltf.scene);
+  //scene.add(box);
+
+  //console.log(gltf.scene.position); // gltf nesnesinin konumu
+  //console.log(box.position); // kutunun konumu
+});
+
+
+loader.load('/profil anim4.gltf', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(0.4,-0.55,11.3);
+  gltf.scene.scale.set(0.1, 0.1, 0.1); // modelin boyutunu ölçeklendirin
+
+
+  //const box = new THREE.BoxHelper(gltf.scene);
+  //scene.add(box);
+
+  //console.log(gltf.scene.position); // gltf nesnesinin konumu
+  //console.log(box.position); // kutunun konumu
+});
+
+
+loader.load('/arka plan.gltf', function(gltf) {
+  scene.add(gltf.scene);
+  gltf.scene.position.set(18,-0.55,70);
+  gltf.scene.scale.set(0.4, 0.4, 0.4); // modelin boyutunu ölçeklendirin
+
+
+  const box = new THREE.BoxHelper(gltf.scene);
+  scene.add(box);
+
+  //console.log(gltf.scene.position); // gltf nesnesinin konumu
+  //console.log(box.position); // kutunun konumu
+});
+
+
+
+
+
+//////// TOGGLE BUTON
+
+let aktifmi=false; //toggle menünün açık olup olmadığını kontrol eden değişken
+const toggleBtn = document.querySelector('.menu-toggle');
+toggleBtn.addEventListener('click', function() {
+  if (toggleBtn.getAttribute('src') === '/toggle@4x.png') {
+    toggleBtn.setAttribute('src', '/toggle2@4x.png');
+    const myElement = document.querySelector('.kapsama2');
+
+    // Display özelliğini değiştirin
+    myElement.style.display = 'block';
+    aktifmi=true;
+  } 
+  else {
+    toggleBtn.setAttribute('src', '/toggle@4x.png');
+    const myElement = document.querySelector('.kapsama2');
+    aktifmi=false;
+
+    // Display özelliğini değiştirin
+    myElement.style.display = 'none';
+  }
+});
+
+
+
+
+//EKRAN BOYUTU DEĞİŞTİĞİNDE KAMERA BOYUTLARINI GÜNCELLEME
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', onWindowResize);
+
+
+  // Animasyon fonksiyonu
+  function animate() {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    requestAnimationFrame(animate);
+    handleCameraShake();
+  
+    renderer.render(scene, camera);
+    
+  }
+
+  animate();
+</script>
+
+      
+</body>
+</html>
